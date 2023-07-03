@@ -181,6 +181,12 @@ if(curl) {
   curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
        res = curl_easy_perform(curl);
        curl_easy_cleanup(curl);
+       if (res) {
+        // res = 0 is OK
+        cout << "\n" << curl_easy_strerror(res) << "\n";
+        exit(1);
+
+       }
 }
        return 0;
     }
