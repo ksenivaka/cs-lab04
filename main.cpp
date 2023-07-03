@@ -1,3 +1,4 @@
+#include <sstream>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -172,13 +173,13 @@ void show_histogram_svg(const vector<size_t>& bins, string filePath) {
     svg_output.close();
 }
 
-int main(int argc, char* argv[])
-{
-    if (argc > 1) {
-            CURL *curl = curl_easy_init();
+Input
+download(const string& address) {
+stringstream buffer;
+CURL *curl = curl_easy_init();
 if(curl) {
        CURLcode res;
-  curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
+  curl_easy_setopt(curl, CURLOPT_URL, address);
        res = curl_easy_perform(curl);
        curl_easy_cleanup(curl);
        if (res) {
@@ -188,9 +189,17 @@ if(curl) {
 
        }
 }
-       return 0;
-    }
+return read_input(buffer, false);
+}
 
+int main(int argc, char* argv[])
+{
+    Input data;
+    if (argc > 1) {
+input = download(argv[1]);
+} else {
+input = read_input(cin, true);
+}
     curl_global_init(CURL_GLOBAL_ALL);
     string fp;
     cout << "Enter input file path: ";
