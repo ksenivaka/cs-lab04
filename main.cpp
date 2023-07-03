@@ -172,8 +172,19 @@ void show_histogram_svg(const vector<size_t>& bins, string filePath) {
     svg_output.close();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc > 1) {
+        cout << argc << "\n";
+        for (int i = 0; i < argc; i++) {
+            cout << "argv[" << i
+            << "] = " << argv[i]
+            << "\n";
+
+        }
+
+    }
+
     curl_global_init(CURL_GLOBAL_ALL);
     string fp;
     cout << "Enter input file path: ";
